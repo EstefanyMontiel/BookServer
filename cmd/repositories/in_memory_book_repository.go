@@ -24,6 +24,8 @@ func (r *InMemoryBookRepository) GetAll() ([]models.Book, error) {
 	}
 	return books, nil
 }
+
+//Funcionalidad para obtener un libro por su ID
 func (r *InMemoryBookRepository) GetByID(id int) (*models.Book, error) {
 	book, exists := r.books[id]
 	if !exists {
@@ -39,6 +41,7 @@ func (r *InMemoryBookRepository) Create(book *models.Book) (models.Book, error) 
 	return *book, nil
 }
 
+//funcionalidad para actualizar un libro existente
 func (r *InMemoryBookRepository) Update(id int, book models.Book) (models.Book, error) {
 	if _, exists := r.books[id]; !exists {
 		return models.Book{}, errors.New("book not found")
@@ -48,6 +51,7 @@ func (r *InMemoryBookRepository) Update(id int, book models.Book) (models.Book, 
 	r.books[id] = book
 	return r.books[id], nil
 }
+//funcionalidad para eliminar un libro existente
 func (r *InMemoryBookRepository) Delete(id int) error {
 	if _, exists := r.books[id]; !exists {
 		return errors.New("book not found")
